@@ -4,7 +4,6 @@ import connectDB from "./config/db.js";
 
 dotenv.config();
 connectDB();
-import cors from "cors";
 
 const PORT = process.env.PORT ;
 console.log(process.env.MONGO_URI)

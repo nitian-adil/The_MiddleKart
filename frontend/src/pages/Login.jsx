@@ -13,17 +13,21 @@ const Login = () => {
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    const data = await loginUser(form);
+    localStorage.setItem("user", JSON.stringify(data));
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const data = await loginUser(form);
-      localStorage.setItem("user", JSON.stringify(data));
-      navigate("/products");
-    } catch {
-      alert("Login failed");
+    if (data.role === "admin") {
+      navigate("/admin/home");
+    } else {
+      navigate("/user/home");
     }
-  };
+  } catch {
+    alert("Login failed");
+  }
+};
 
   return (
     <div className="min-h-screen flex items-center justify-center">

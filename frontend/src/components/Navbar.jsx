@@ -3,39 +3,53 @@ import { useCart } from "../context/CartContext";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const { cart } = useCart(); // ✅ cart from context
+  const { cart } = useCart();
 
   // get user from localStorage
   const user = JSON.parse(localStorage.getItem("user"));
+
+  const isAdmin = user?.role === "admin";
 
   const handleLogout = () => {
     localStorage.removeItem("user");
     navigate("/login");
   };
 
-  // ✅ total cart quantity
+  // total cart quantity
   const cartCount = cart.reduce((sum, item) => sum + item.qty, 0);
 
   return (
     <nav className="bg-white border-b shadow-sm sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
 
-        {/* Logo */}
-        <Link to="/" className="text-2xl font-bold text-black">
+        {/* LOGO */}
+        <Link
+          to={isAdmin ? "/admin/home" : "/"}
+          className="text-2xl font-bold text-black"
+        >
           Middle<span className="text-orange-500">Kart</span>
         </Link>
 
-        {/* Links */}
+        {/* LINKS */}
         <div className="flex items-center gap-6">
-          <Link className="text-gray-600 hover:text-black" to="/">
+
+          {/* HOME */}
+          <Link
+            className="text-gray-600 hover:text-black"
+            to={isAdmin ? "/admin/home" : "/"}
+          >
             Home
           </Link>
 
-          <Link className="text-gray-600 hover:text-black" to="/products">
+          {/* PRODUCTS */}
+          <Link
+            className="text-gray-600 hover:text-black"
+            to={isAdmin ? "admin/products" : "user/products"}
+          >
             Products
           </Link>
 
-          {/* NOT logged in */}
+          {/* NOT LOGGED IN */}
           {!user && (
             <>
               <Link className="text-gray-600 hover:text-black" to="/login">
@@ -51,27 +65,30 @@ const Navbar = () => {
             </>
           )}
 
-          {/* Logged in */}
+          {/* LOGGED IN */}
           {user && (
-            <button
-              onClick={handleLogout}
-              className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
-            >
-              Logout
-            </button>
+            <>
+              <button
+                onClick={handleLogout}
+                className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
+              >
+                Logout
+              </button>
+
+              {/* CART (only for users, not admin) */}
+              {!isAdmin && (
+                <Link to="/cart" className="relative text-xl">
+                  🛒
+                  {cartCount > 0 && (
+                    <span className="absolute -top-2 -right-3 bg-orange-500 text-white text-xs px-1.5 rounded-full">
+                      {cartCount}
+                    </span>
+                  )}
+                </Link>
+              )}
+            </>
           )}
-
-          {/* 🛒 Cart */}
-          <Link to="/cart" className="relative text-xl">
-            🛒
-            {cartCount > 0 && (
-              <span className="absolute -top-2 -right-3 bg-orange-500 text-white text-xs px-1.5 rounded-full">
-                {cartCount}
-              </span>
-            )}
-          </Link>
         </div>
-
       </div>
     </nav>
   );

@@ -15,7 +15,7 @@ const AdminLayout = () => {
             Dashboard
           </NavLink>
           <NavLink to="/admin/products" className="admin-link">
-            Products
+           Add Products
           </NavLink>
           <NavLink to="/admin/sales" className="admin-link">
             Sales

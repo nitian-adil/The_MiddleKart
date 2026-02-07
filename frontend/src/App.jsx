@@ -26,6 +26,7 @@ const App = () => {
 
 
  <Routes>
+  
   <Route
     path="/admin"
     element={
@@ -52,16 +53,8 @@ const App = () => {
     </AdminRoute>
   }
 />
-  <Route
-    path="/user/home"
-    element={
-      <UserRoute>
-        <UserHome />
-      </UserRoute>
-    }
-  />
 
-  <Route
+<Route
     path="/admin/home"
     element={
       <AdminRoute>
@@ -71,7 +64,18 @@ const App = () => {
   />
 
   <Route
-    path="/products"
+    path="/user/home"
+    element={
+      <UserRoute>
+        <UserHome />
+      </UserRoute>
+    }
+  />
+
+  
+
+  <Route
+    path="admin/products"
     element={
       <ProtectedRoute>
         <Products />
@@ -79,6 +83,22 @@ const App = () => {
     }
   />
 
+<Route
+    path="user/products"
+    element={
+      <ProtectedRoute>
+        <Products />
+      </ProtectedRoute>
+    }
+  />
+  <Route
+    path="amin/products"
+    element={
+      <ProtectedRoute>
+        <Products />
+      </ProtectedRoute>
+    }
+  />
   <Route
     path="/cart"
     element={

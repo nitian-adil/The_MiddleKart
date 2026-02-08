@@ -5,33 +5,39 @@ const CartContext = createContext();
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
 
-  // ADD TO CART
+  // ✅ ADD TO CART (merge logic)
   const addToCart = (product) => {
     setCart((prev) => {
-      const existing = prev.find((item) => item.id === product.id);
+      const existingItem = prev.find(
+        (item) => item._id === product._id
+      );
 
-      if (existing) {
+      if (existingItem) {
+        // 🔁 increase qty
         return prev.map((item) =>
-          item.id === product.id
+          item._id === product._id
             ? { ...item, qty: item.qty + 1 }
             : item
         );
       }
 
+      // 🆕 new product
       return [...prev, { ...product, qty: 1 }];
     });
   };
 
-  // REMOVE
+  // ✅ REMOVE
   const removeFromCart = (id) => {
-    setCart((prev) => prev.filter((item) => item.id !== id));
+    setCart((prev) => prev.filter((item) => item._id !== id));
   };
 
-  // UPDATE QTY
+  // ✅ UPDATE QTY
   const updateQty = (id, qty) => {
+    if (qty < 1) return;
+
     setCart((prev) =>
       prev.map((item) =>
-        item.id === id ? { ...item, qty } : item
+        item._id === id ? { ...item, qty } : item
       )
     );
   };

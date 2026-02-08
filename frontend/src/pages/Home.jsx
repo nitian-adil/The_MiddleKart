@@ -35,12 +35,12 @@ const Home = () => {
                 Shop Now
               </button>
 
-              <button
+              {/* <button
                 onClick={() => navigate("/register")}
                 className="border border-black px-6 py-3 rounded-xl hover:bg-black hover:text-white transition"
               >
                 Create Account
-              </button>
+              </button> */}
             </div>
           </motion.div>
         <WhyMiddleKart/>

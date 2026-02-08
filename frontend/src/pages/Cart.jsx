@@ -22,11 +22,12 @@ const Cart = () => {
 
       {cart.map((item) => (
         <div
-          key={item.id}
+          key={item._id} // ✅ FIX
           className="flex items-center gap-6 bg-white p-4 rounded-xl shadow mb-4"
         >
           <img
             src={item.image}
+            alt={item.title}
             className="h-20 object-contain"
           />
 
@@ -43,14 +44,14 @@ const Cart = () => {
             min="1"
             value={item.qty}
             onChange={(e) =>
-              updateQty(item.id, Number(e.target.value))
+              updateQty(item._id, Number(e.target.value)) // ✅ FIX
             }
             className="w-16 border rounded px-2"
           />
 
           {/* DELETE */}
           <button
-            onClick={() => removeFromCart(item.id)}
+            onClick={() => removeFromCart(item._id)} // ✅ FIX
             className="text-red-500 font-semibold"
           >
             Delete

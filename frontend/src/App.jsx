@@ -1,125 +1,98 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
+import { AuthProvider } from "./context/AuthContext";
 
+// public pages
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Products from "./pages/Products";
 import Cart from "./pages/Cart";
-import Checkout from "./pages/Checkout";
 import Orders from "./pages/Orders";
+
+// route guards
 import ProtectedRoute from "./components/ProtectedRoute";
 import AdminRoute from "./components/AdminRoute";
-import AdminDashboard from "./pages/admin/AdminHome";
 import UserRoute from "./components/UserRoute";
+
+// user pages
 import UserHome from "./pages/user/userHome";
-import AdminHome from './pages/admin/AdminHome'
+
+// admin pages
+import AdminLayout from "./pages/admin/AdminLayout";
+import AdminHome from "./pages/admin/AdminHome";
+import AdminProducts from "./pages/admin/AdminProduct";
 import AddProduct from "./pages/admin/AddProduct";
-import AdminProducts from "./pages/admin/AddProduct";
 import AdminSales from "./pages/admin/AdminSales";
 import AdminUsers from "./pages/admin/AdminUsers";
-import AdminLayout from "./pages/admin/AdminLayout";
+
 const App = () => {
   return (
-    <BrowserRouter>
-      <Navbar />
+      <BrowserRouter>
+        <Navbar />
 
+        <Routes>
 
- <Routes>
-  
-  <Route
-    path="/admin"
-    element={
-      <AdminRoute>
-        <AdminLayout />
-      </AdminRoute>
-    }
-  >
-    <Route index element={<AdminHome />} /> {/* default */}
-    <Route path="home" element={<AdminHome />} />
-    <Route path="products" element={<AdminProducts />} />
-    <Route path="sales" element={<AdminSales />} />
-    <Route path="users" element={<AdminUsers />} />
-  </Route>
-  <Route path="/" element={<Home />} />
-  <Route path="/login" element={<Login />} />
-  <Route path="/register" element={<Register />} />
-  <Route path="/cart" element={<Cart/>} />
-<Route
-  path="/admin/add-product"
-  element={
-    <AdminRoute>
-      <AddProduct />
-    </AdminRoute>
-  }
-/>
+          {/* ================= ADMIN ROUTES ================= */}
+          <Route
+            path="/admin"
+            element={
+              <AdminRoute>
+                <AdminLayout />
+              </AdminRoute>
+            }
+          >
+            <Route path="home" element={<AdminHome />} />
+            <Route path="products" element={<AdminProducts />} />
+            <Route path="addproduct" element={<AddProduct />} />
+            <Route path="sales" element={<AdminSales />} />
+            <Route path="users" element={<AdminUsers />} />
+          </Route>
 
-<Route
-    path="/admin/home"
-    element={
-      <AdminRoute>
-        <AdminHome />
-      </AdminRoute>
-    }
-  />
+          {/* ================= PUBLIC ROUTES ================= */}
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
 
-  <Route
-    path="/user/home"
-    element={
-      <UserRoute>
-        <UserHome />
-      </UserRoute>
-    }
-  />
+          {/* ================= USER ROUTES ================= */}
+          <Route
+            path="/user/home"
+            element={
+              <UserRoute>
+                <UserHome />
+              </UserRoute>
+            }
+          />
 
-  
+          <Route
+            path="/products"
+            element={
+              <ProtectedRoute>
+                <Products />
+              </ProtectedRoute>
+            }
+          />
 
-  <Route
-    path="admin/products"
-    element={
-      <ProtectedRoute>
-        <Products />
-      </ProtectedRoute>
-    }
-  />
+          <Route
+            path="/cart"
+            element={
+              <ProtectedRoute>
+                <Cart />
+              </ProtectedRoute>
+            }
+          />
 
-<Route
-    path="user/products"
-    element={
-      <ProtectedRoute>
-        <Products />
-      </ProtectedRoute>
-    }
-  />
-  <Route
-    path="amin/products"
-    element={
-      <ProtectedRoute>
-        <Products />
-      </ProtectedRoute>
-    }
-  />
-  <Route
-    path="/cart"
-    element={
-      <ProtectedRoute>
-        <Cart />
-      </ProtectedRoute>
-    }
-  />
+          <Route
+            path="/orders"
+            element={
+              <ProtectedRoute>
+                <Orders />
+              </ProtectedRoute>
+            }
+          />
 
-  <Route
-    path="/orders"
-    element={
-      <ProtectedRoute>
-        <Orders />
-      </ProtectedRoute>
-    }
-  />
-</Routes>
-
-
-    </BrowserRouter>
+        </Routes>
+      </BrowserRouter>
   );
 };
 

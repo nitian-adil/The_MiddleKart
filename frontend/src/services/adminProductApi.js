@@ -7,7 +7,9 @@ const API = axios.create({
 
 // 🔹 ADD PRODUCT
 export const addProduct = async (productData) => {
-  const response = await API.post("/products", productData);
+
+  const response = await API.post("/products/addproducts", productData);
+  console.log("response ",response)
   return response.data;
 };
 

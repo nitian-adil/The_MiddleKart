@@ -77,6 +77,7 @@ const Products = () => {
                 <p className="text-lg font-bold text-orange-500 mt-2">
                   ₹{product.price}
                 </p>
+                
               </div>
             </motion.div>
           ))}
@@ -148,7 +149,7 @@ const Products = () => {
                     <button
                       onClick={() => {
                         addToCart(selectedProduct);
-                        navigate("/cart");
+                        // navigate("/cart");
                       }}
                       className="flex-1 bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-xl font-semibold transition"
                     >

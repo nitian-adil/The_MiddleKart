@@ -1,21 +1,21 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
+import { useAuth } from "../context/AuthContext";
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const { user, logout, loading } = useAuth();
   const { cart } = useCart();
 
-  // get user from localStorage
-  const user = JSON.parse(localStorage.getItem("user"));
+  if (loading) return null; // 🔥 prevent flicker
 
   const isAdmin = user?.role === "admin";
 
   const handleLogout = () => {
-    localStorage.removeItem("user");
+    logout();               // ✅ single source of truth
     navigate("/login");
   };
 
-  // total cart quantity
   const cartCount = cart.reduce((sum, item) => sum + item.qty, 0);
 
   return (
@@ -33,7 +33,6 @@ const Navbar = () => {
         {/* LINKS */}
         <div className="flex items-center gap-6">
 
-          {/* HOME */}
           <Link
             className="text-gray-600 hover:text-black"
             to={isAdmin ? "/admin/home" : "/"}
@@ -41,41 +40,36 @@ const Navbar = () => {
             Home
           </Link>
 
-          {/* PRODUCTS */}
           <Link
             className="text-gray-600 hover:text-black"
-            to={isAdmin ? "admin/products" : "user/products"}
+            to={isAdmin ? "/admin/products" : "/products"}
           >
             Products
           </Link>
 
-          {/* NOT LOGGED IN */}
           {!user && (
             <>
-              <Link className="text-gray-600 hover:text-black" to="/login">
+              <Link to="/login" className="text-gray-600 hover:text-black">
                 Login
               </Link>
-
               <Link
-                className="bg-black text-white px-4 py-2 rounded-md hover:bg-gray-800"
                 to="/register"
+                className="bg-black text-white px-4 py-2 rounded-md"
               >
                 Sign Up
               </Link>
             </>
           )}
 
-          {/* LOGGED IN */}
           {user && (
             <>
               <button
                 onClick={handleLogout}
-                className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
+                className="bg-red-500 text-white px-4 py-2 rounded-md"
               >
                 Logout
               </button>
 
-              {/* CART (only for users, not admin) */}
               {!isAdmin && (
                 <Link to="/cart" className="relative text-xl">
                   🛒

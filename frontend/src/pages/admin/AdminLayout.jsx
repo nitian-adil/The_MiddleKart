@@ -1,4 +1,5 @@
 import { NavLink, Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const AdminLayout = () => {
   return (
@@ -14,9 +15,12 @@ const AdminLayout = () => {
           <NavLink to="/admin/home" className="admin-link">
             Dashboard
           </NavLink>
-          <NavLink to="/admin/products" className="admin-link">
-           Add Products
-          </NavLink>
+        <Link
+  to="/admin/addproduct"
+  className="block px-4 py-2 rounded hover:bg-orange-100"
+>
+  ➕ Add Product
+</Link>
           <NavLink to="/admin/sales" className="admin-link">
             Sales
           </NavLink>

@@ -2,30 +2,24 @@ import mongoose from "mongoose";
 
 const productSchema = new mongoose.Schema(
   {
-    name: {
+    title: {
       type: String,
       required: true,
       trim: true,
-    },
-    description: {
-      type: String,
-      required: true,
     },
     price: {
       type: Number,
       required: true,
     },
-    stock: {
-      type: Number,
-      default: 0,
-    },
-    category: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Category",
+    image: {
+      type: String,
       required: true,
     },
-    image: {
-      type: String, // image URL (later Cloudinary)
+    description: {
+      type: String,
+    },
+    category: {
+      type: String,
     },
   },
   { timestamps: true }

@@ -40,6 +40,7 @@ export const protect = async (req, res, next) => {
 
 // 🛡️ Admin-only access
 export const isAdmin = (req, res, next) => {
+  console.log("USERs:", req.user);
   if (req.user && req.user.role === "admin") {
     next();
   } else {

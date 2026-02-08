@@ -1,16 +1,14 @@
 import { Navigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const AdminRoute = ({ children }) => {
-  const user = JSON.parse(localStorage.getItem("user"));
-
-  if (!user) {
-    return <Navigate to="/login" />;
+  const { user, loading } = useAuth();
+    if (loading) return null;
+if (!user || user.role !== "admin") {
+    return <Navigate to="/login" replace />;
   }
 
-  if (user.role !== "admin") {
-    return <Navigate to="/user/home" />;
-  }
-
+  
   return children;
 };
 

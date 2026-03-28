@@ -43,3 +43,43 @@ export const getProducts = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+export const updateProduct =async (req,res)=>{
+  try {
+    const { quantity } = req.body;
+    console.log("quantity" , quantity)
+
+    const product = await Product.findByIdAndUpdate(
+      req.params.id,
+      { quantity },
+      { new: true }
+    );
+
+    res.json(product);
+  } catch (error) {
+    res.status(500).json({ message: "Failed to update quantity" });
+  }
+}
+
+// ✅ DELETE PRODUCT (ADMIN)
+export const deleteProduct = async (req, res) => {
+  try {
+    const product = await Product.findByIdAndDelete(req.params.id);
+
+    if (!product) {
+      return res.status(404).json({
+        message: "Product not found",
+      });
+    }
+
+    res.json({
+      message: "Product deleted successfully",
+      product,
+    });
+  } catch (error) {
+    console.error("Delete Product Error:", error);
+    res.status(500).json({
+      message: "Server error",
+    });
+  }
+};

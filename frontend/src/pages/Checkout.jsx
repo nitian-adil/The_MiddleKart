@@ -1,5 +1,6 @@
 import { placeOrder } from "../services/orderApi";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const Checkout = () => {
   const navigate = useNavigate();
@@ -7,10 +8,11 @@ const Checkout = () => {
   const handleOrder = async () => {
     try {
       await placeOrder();
-      alert("Order placed successfully");
+      toast.success("Order Placed successfully ✅");
+
       navigate("/orders");
     } catch {
-      alert("Order failed");
+      toast.error("Order Failed")
     }
   };
 

@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* ✅ ADD THIS */
+body {
+  @apply bg-white dark:bg-gray-950 text-black dark:text-white;
+}

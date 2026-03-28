@@ -4,7 +4,7 @@ const AdminSales = () => {
   return (
     <>
       <h1 className="text-3xl font-bold mb-6">Sales</h1>
-      <div className="bg-white p-6 rounded-xl shadow">
+      <div className="bg-white dark:bg-gray-900 p-6 rounded-xl shadow">
         Sales analytics coming soon 📊
       </div>
     </>

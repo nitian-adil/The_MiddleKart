@@ -19,11 +19,12 @@ const WhyMiddleKart = () => {
 
       while (isActive) {
         await controls.start((i) => ({
-          scale: i === index ? 1.2 : 1,
-          transition: { duration: 0.5, ease: "easeInOut" },
+          scale: i === index ? 1.15 : 1,
+          color: i === index ? "#f97316" : "", // orange highlight
+          transition: { duration: 0.4 },
         }));
 
-        await new Promise((r) => setTimeout(r, 900));
+        await new Promise((r) => setTimeout(r, 800));
 
         index = (index + 1) % items.length;
       }
@@ -32,7 +33,7 @@ const WhyMiddleKart = () => {
     animateItems();
 
     return () => {
-      isActive = false; // stop animation on exit
+      isActive = false;
     };
   }, [controls]);
 
@@ -43,24 +44,26 @@ const WhyMiddleKart = () => {
       transition={{ duration: 0.8 }}
       className="flex justify-center"
     >
-      <div className="bg-white rounded-3xl shadow-2xl p-8 w-full max-w-sm">
-        <h3 className="text-xl font-semibold mb-4 text-center">
+      <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-3xl shadow-2xl p-8 w-full max-w-sm text-black dark:text-white">
+
+        <h3 className="text-xl font-semibold mb-6 text-center text-gray-800 dark:text-white">
           Why MiddleKart?
         </h3>
 
-        <ul className="space-y-3 text-gray-600">
+        <ul className="space-y-4 text-gray-600 dark:text-gray-300">
           {items.map((text, index) => (
             <motion.li
               key={index}
               custom={index}
               animate={controls}
               initial={{ scale: 1 }}
-              className="origin-left"
+              className="origin-left flex items-center gap-2"
             >
               {text}
             </motion.li>
           ))}
         </ul>
+
       </div>
     </motion.div>
   );

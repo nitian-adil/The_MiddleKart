@@ -36,7 +36,7 @@ const UserHome = () => {
       </div>
 
       {/* QUICK ACTIONS */}
-      <div className="bg-white rounded-xl shadow p-6 mb-8">
+      <div className="bg-white dark:bg-gray-900 rounded-xl shadow p-6 mb-8">
         <h2 className="text-xl font-semibold mb-4">
           Quick Actions
         </h2>
@@ -66,7 +66,7 @@ const UserHome = () => {
       </div>
 
       {/* RECENT ACTIVITY */}
-      <div className="bg-white rounded-xl shadow p-6">
+      <div className="bg-white dark:bg-gray-900 rounded-xl shadow p-6">
         <h2 className="text-xl font-semibold mb-3">
           Recent Activity
         </h2>
@@ -81,7 +81,7 @@ const UserHome = () => {
 
 /* SMALL REUSABLE CARD */
 const StatCard = ({ icon, title, value }) => (
-  <div className="bg-white rounded-xl shadow p-6 flex items-center gap-4">
+  <div className="bg-white dark:bg-gray-900 rounded-xl shadow p-6 flex items-center gap-4">
     <div className="bg-gray-100 p-3 rounded-full">
       {icon}
     </div>

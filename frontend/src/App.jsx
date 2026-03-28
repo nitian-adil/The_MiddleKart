@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import { AuthProvider } from "./context/AuthContext";
-
+import { Toaster } from "react-hot-toast";
 // public pages
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -25,11 +25,42 @@ import AdminProducts from "./pages/admin/AdminProduct";
 import AddProduct from "./pages/admin/AddProduct";
 import AdminSales from "./pages/admin/AdminSales";
 import AdminUsers from "./pages/admin/AdminUsers";
+import Payment from "./pages/Payment";
 
 const App = () => {
   return (
+     <div className="bg-white dark:bg-gray-950 min-h-screen text-black dark:text-white">
       <BrowserRouter>
-        <Navbar />
+  <Toaster
+        position="top-right"
+        toastOptions={{
+          style: {
+            background: "#1f2937",
+            color: "#fff",
+            padding: "14px 18px",
+            borderRadius: "12px",
+            fontSize: "14px",
+          },
+          success: {
+            style: {
+              border: "1px solid #22c55e",
+            },
+            iconTheme: {
+              primary: "#22c55e",
+              secondary: "#fff",
+            },
+          },
+          error: {
+            style: {
+              border: "1px solid #ef4444",
+            },
+            iconTheme: {
+              primary: "#ef4444",
+              secondary: "#fff",
+            },
+          },
+        }}
+      />        <Navbar />
 
         <Routes>
 
@@ -63,6 +94,14 @@ const App = () => {
               </UserRoute>
             }
           />
+          <Route
+  path="/payment"
+  element={
+    <ProtectedRoute>
+      <Payment/>
+    </ProtectedRoute>
+  }
+/>
 
           <Route
             path="/products"
@@ -93,6 +132,7 @@ const App = () => {
 
         </Routes>
       </BrowserRouter>
+      </div>
   );
 };
 

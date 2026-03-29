@@ -1,9 +1,15 @@
 import express from "express";
-import {getDashboardStats,getAllUsersWithPurchaseCount}  from "../controller/adminController.js";
-import { isAdmin } from "../middleware/authMiddleware.js";
+import {
+  getDashboardStats,
+  getAllUsersWithPurchaseCount
+} from "../controller/adminController.js";
+
+import { protect, isAdmin } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-router.get("/users", isAdmin, getAllUsersWithPurchaseCount);
-router.get("/dashboard", isAdmin, getDashboardStats);
+// ✅ FIXED ROUTES
+router.get("/users", protect, isAdmin, getAllUsersWithPurchaseCount);
+router.get("/dashboard", protect, isAdmin, getDashboardStats);
+
 export default router;

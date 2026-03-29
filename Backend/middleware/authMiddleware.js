@@ -5,7 +5,6 @@ import User from "../models/UserModel.js";
 export const protect = async (req, res, next) => {
   try {
     const authHeader = req.headers.authorization;
-
     // Check header
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
       return res.status(401).json({
@@ -40,7 +39,6 @@ export const protect = async (req, res, next) => {
 
 // 🛡️ Admin-only access
 export const isAdmin = (req, res, next) => {
-  console.log("USERs:", req.user);
   if (req.user && req.user.role === "admin") {
     next();
   } else {

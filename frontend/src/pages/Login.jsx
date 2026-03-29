@@ -18,7 +18,7 @@ const Login = () => {
     try {
       const data = await loginUser(form);
       login(data);
-
+  localStorage.setItem("token", data.token);
       if (data.role === "admin") {
         navigate("/admin/home");
       } else {

@@ -1,4 +1,8 @@
+import { useTranslation } from "react-i18next";
+
 const ProductCard = ({ product, onAdd }) => {
+    const { t, i18n } = useTranslation();
+
   return (
     <div className="bg-white dark:bg-gray-900 rounded-lg shadow hover:shadow-lg transition p-4">
 
@@ -20,7 +24,7 @@ const ProductCard = ({ product, onAdd }) => {
         onClick={() => onAdd(product._id)}
         className="mt-4 w-full bg-black dark:bg-white text-white dark:text-black py-2 rounded hover:bg-gray-800 dark:hover:bg-gray-300 transition"
       >
-        Add to Cart
+       {t("addToCart")}
       </button>
     </div>
   );

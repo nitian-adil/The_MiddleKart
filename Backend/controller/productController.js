@@ -83,3 +83,15 @@ export const deleteProduct = async (req, res) => {
     });
   }
 };
+
+
+export const autoRecommendation=async(req,res)=>{
+  const product = await Product.findById(req.params.id);
+
+  const recommendations = await Product.find({
+    category: product.category,
+    _id: { $ne: product._id }, // exclude current product
+  }).limit(6);
+
+  res.json(recommendations);
+}

@@ -3,11 +3,14 @@ import { loginUser } from "../services/authApi";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 const Login = () => {
   const [form, setForm] = useState({ email: "", password: "" });
   const navigate = useNavigate();
   const { login } = useAuth();
+    const { t, i18n } = useTranslation();
+
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -52,7 +55,7 @@ const Login = () => {
         {/* EMAIL */}
         <input
           name="email"
-          placeholder="Email"
+          placeholder={t("email")}
           className="w-full p-3 mb-4 rounded-xl border border-green-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-black dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500"
           onChange={handleChange}
           required
@@ -62,7 +65,7 @@ const Login = () => {
         <input
           name="password"
           type="password"
-          placeholder="Password"
+          placeholder={t("password")}
           className="w-full p-3 mb-6 rounded-xl border border-green-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-black dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500"
           onChange={handleChange}
           required
@@ -70,7 +73,7 @@ const Login = () => {
 
         {/* BUTTON */}
         <button className="w-full bg-green-600 hover:bg-green-700 transition text-white py-3 rounded-xl font-semibold">
-          Login
+          {t("login")}
         </button>
 
         {/* FOOTER TEXT */}

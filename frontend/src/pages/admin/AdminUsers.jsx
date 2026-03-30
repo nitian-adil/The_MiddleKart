@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { getAllUsers } from "../../services/adminUserApi";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 const AdminUsers = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
+      const { t, i18n } = useTranslation();
 
   useEffect(() => {
     const loadUsers = async () => {
@@ -34,7 +36,8 @@ const AdminUsers = () => {
     <div className="min-h-screen bg-white dark:bg-gray-950 text-black dark:text-white px-6 py-10">
 
       <h1 className="text-3xl font-bold mb-8">
-        Users
+                    {t("users")}
+
       </h1>
 
       <motion.div
@@ -48,8 +51,8 @@ const AdminUsers = () => {
           {/* HEADER */}
           <thead className="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300">
             <tr>
-              <th className="p-4">Name</th>
-              <th className="p-4">Email</th>
+              <th className="p-4">{t("name")}</th>
+              <th className="p-4">{t("email")}</th>
               <th className="p-4 text-center">Orders</th>
               <th className="p-4 text-center">Products Purchased</th>
             </tr>

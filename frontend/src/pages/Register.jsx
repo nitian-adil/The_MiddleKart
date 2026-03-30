@@ -2,6 +2,10 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { registerUser } from "../services/authApi";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
+
+
+
 
 const Register = () => {
   const [form, setForm] = useState({
@@ -10,6 +14,9 @@ const Register = () => {
     password: "",
     role: "user",
   });
+  
+      const { t, i18n } = useTranslation();
+  
 
   const navigate = useNavigate();
 
@@ -53,13 +60,13 @@ const Register = () => {
                    p-8 rounded-2xl shadow-2xl space-y-5 transition"
       >
         <h2 className="text-3xl font-bold text-center text-red-600 dark:text-red-400">
-          Create Account
+            {t("createaccount")}
         </h2>
 
         {/* NAME */}
         <input
-          name="name"
-          placeholder="Full Name"
+          name={t("name")}
+          placeholder={t("fullname")}
           value={form.name}
           onChange={handleChange}
           required
@@ -73,9 +80,10 @@ const Register = () => {
 
         {/* EMAIL */}
         <input
-          name="email"
+          name= {t("name")}
+
           type="email"
-          placeholder="Email Address"
+          placeholder={t("email")}
           value={form.email}
           onChange={handleChange}
           required
@@ -89,9 +97,9 @@ const Register = () => {
 
         {/* PASSWORD */}
         <input
-          name="password"
+          name= {t("password")}
           type="password"
-          placeholder="Password"
+          placeholder= {t("password")}
           value={form.password}
           onChange={handleChange}
           required
@@ -125,7 +133,7 @@ const Register = () => {
           className="w-full bg-red-500 hover:bg-red-600 
                      text-white py-2 rounded-lg font-semibold transition"
         >
-          Register
+           {t("register")}
         </button>
 
         {/* FOOTER */}
@@ -135,7 +143,7 @@ const Register = () => {
             className="text-red-600 dark:text-red-400 cursor-pointer hover:underline"
             onClick={() => navigate("/login")}
           >
-            Login
+            {t("login")}
           </span>
         </p>
       </form>

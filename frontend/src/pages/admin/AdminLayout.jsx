@@ -1,6 +1,9 @@
 import { NavLink, Outlet, Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const AdminLayout = () => {
+    const { t, i18n } = useTranslation();
+
   return (
     <div className="flex min-h-screen bg-gray-100 dark:bg-gray-950 text-black dark:text-white transition">
 
@@ -8,7 +11,7 @@ const AdminLayout = () => {
       <aside className="w-64 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-700 shadow-lg">
 
         <div className="p-6 text-2xl font-bold text-orange-500">
-          Admin Panel
+          {t("adminpanel")}
         </div>
 
         <nav className="flex flex-col gap-2 px-4">
@@ -56,7 +59,7 @@ const AdminLayout = () => {
               }`
             }
           >
-            Users
+                    {t("users")}
           </NavLink>
 
         </nav>

@@ -7,7 +7,6 @@
     try {
       // 🔍 Step 1: Get users
 const users = await User.find({  role: { $regex: /^user$/i } }).select("name email");
-      console.log("Users found:", users.length); // DEBUG
 
       const usersWithStats = await Promise.all(
         users.map(async (user) => {
